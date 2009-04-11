@@ -20,31 +20,36 @@
 
 #import "LTKeyPressTableView.h"
 
-BOOL LTKeyPressTableViewKeyDown(NSEvent *event, NSTableView *table, id delegate)
+@implementation NSTableView (LTKeyPressTableViewAdditions)
+
+- (BOOL)performKeyPressFromKeyDown:(NSEvent *)event
 {
+	id delegate = [self delegate];
+
 	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
 	if ((key == NSDeleteCharacter) && [delegate respondsToSelector:@selector(deleteSelectionFromTableView:)]) {
-		if ([table selectedRow] == -1)
+		if ([self selectedRow] == -1)
 			NSBeep();
 		else
-			[delegate deleteSelectionFromTableView:table];
+			[delegate deleteSelectionFromTableView:self];
 		return YES;
 	} else if ((key == 0xf702) && [delegate respondsToSelector:@selector(goLeftFromTableView:)]) {
-		[delegate goLeftFromTableView:table];
+		[delegate goLeftFromTableView:self];
 		return YES;
 	} else if ((key == 0xf703) && [delegate respondsToSelector:@selector(goRightFromTableView:)]) {
-		[delegate goRightFromTableView:table];
+		[delegate goRightFromTableView:self];
 		return YES;
-	} else if (((key == NSEnterCharacter) || (key == NSCarriageReturnCharacter)) && (![delegate respondsToSelector:@selector(preventEnterEditingTableView:)] || ![delegate preventEnterEditingTableView:table])) {
-		NSInteger selectedRow = [table selectedRow];
+	} else if (((key == NSEnterCharacter) || (key == NSCarriageReturnCharacter)) &&
+			   (![delegate respondsToSelector:@selector(preventEnterEditingTableView:)] || ![delegate preventEnterEditingTableView:self])) {
+		NSInteger selectedRow = [self selectedRow];
 		if (selectedRow == -1) {
 			NSBeep();
 			return YES;
 		} else {
-			NSArray *columns = [table tableColumns];
+			NSArray *columns = [self tableColumns];
 			for(NSTableColumn *column in columns) {
 				if ([[column dataCell] isEditable]) {
-					[table editColumn:[columns indexOfObject:column] row:selectedRow withEvent:nil select:YES];
+					[self editColumn:[columns indexOfObject:column] row:selectedRow withEvent:nil select:YES];
 					return YES;
 				}
 			}
@@ -53,11 +58,13 @@ BOOL LTKeyPressTableViewKeyDown(NSEvent *event, NSTableView *table, id delegate)
 	return NO;
 }
 
+@end
+
 @implementation LTKeyPressTableView
 
 - (void)keyDown:(NSEvent *)event
 {
-	if (!LTKeyPressTableViewKeyDown(event, self, [self delegate]))
+	if (![self performKeyPressFromKeyDown:event])
 		[super keyDown:event];
 }
 
@@ -67,7 +74,7 @@ BOOL LTKeyPressTableViewKeyDown(NSEvent *event, NSTableView *table, id delegate)
 
 - (void)keyDown:(NSEvent *)event
 {
-	if (!LTKeyPressTableViewKeyDown(event, self, [self delegate]))
+	if (![self performKeyPressFromKeyDown:event])
 		[super keyDown:event];
 }
 

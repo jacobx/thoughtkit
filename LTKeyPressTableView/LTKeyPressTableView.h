@@ -20,6 +20,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@interface NSTableView (LTKeyPressTableViewAdditions)
+- (BOOL)performKeyPressFromKeyDown:(NSEvent *)event;
+@end
+
 @interface LTKeyPressTableView : NSTableView
 @end
 
