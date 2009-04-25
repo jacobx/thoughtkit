@@ -22,7 +22,7 @@
 
 @implementation NSColor (LTColor)
 
-+ (NSColor *)colorWithCGColor:(CGColorRef)color;
++ (NSColor *)colorWithCGColor:(CGColorRef)color
 {
 	NSInteger count = CGColorGetNumberOfComponents(color);
 	const CGFloat *comps = CGColorGetComponents(color);
@@ -35,7 +35,7 @@
 	return newColor;
 }
 
-- (CGColorRef)CGColor;
+- (CGColorRef)CGColor
 {
 	if ([[self colorSpaceName] isEqualToString:NSPatternColorSpace])
 		return NULL;
@@ -55,7 +55,7 @@
 
 @implementation CIColor (LTColor)
 
-+ (CIColor *)colorWithNSColor:(NSColor *)color;
++ (CIColor *)colorWithNSColor:(NSColor *)color
 {
 	CGColorRef quartzColor = [color CGColor];
 	if (!quartzColor)
@@ -63,7 +63,7 @@
 	return [CIColor colorWithCGColor:quartzColor];
 }
 
-- (NSColor *)NSColor;
+- (NSColor *)NSColor
 {
 	NSInteger count = [self numberOfComponents];
 	const CGFloat *comps = [self components];
@@ -76,7 +76,7 @@
 	return newColor;
 }
 
-- (CGColorRef)CGColor;
+- (CGColorRef)CGColor
 {
 	CGColorSpaceRef quartzSpace = [self colorSpace];
 	const CGFloat *comps = [self components];

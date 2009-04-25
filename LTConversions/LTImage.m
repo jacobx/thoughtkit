@@ -23,7 +23,7 @@
 
 @implementation NSImage (LTImage)
 
-- (NSBitmapImageRep *)bitmapImageRep;
+- (NSBitmapImageRep *)bitmapImageRep
 {
 	id imageRep = [self bestRepresentationForDevice:nil];
 	if ([imageRep isKindOfClass:[NSBitmapImageRep class]])
@@ -31,7 +31,7 @@
 	return [NSBitmapImageRep imageRepWithData:[self TIFFRepresentation]];
 }
 
-+ (NSImage *)imageWithCGImage:(CGImageRef)image;
++ (NSImage *)imageWithCGImage:(CGImageRef)image
 {
 	NSImage *newImage = [[NSImage alloc] initWithSize:NSMakeSize(CGImageGetWidth(image), CGImageGetHeight(image))];
 	NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:image];
@@ -40,12 +40,12 @@
 	return [newImage autorelease];
 }
 
-- (CGImageRef)CGImage;
+- (CGImageRef)CGImage
 {
 	return [[self bitmapImageRep] CGImage];
 }
 
-+ (NSImage *)imageWithCIImage:(CIImage *)image;
++ (NSImage *)imageWithCIImage:(CIImage *)image
 {
 	CGRect extent = [image extent];
 	if (CGRectIsInfinite(extent) || CGRectIsEmpty(extent))
@@ -57,7 +57,7 @@
 	return [newImage autorelease];
 }
 
-- (CIImage *)CIImage;
+- (CIImage *)CIImage
 {
 	CIImage *newImage = [[CIImage alloc] initWithBitmapImageRep:[self bitmapImageRep]];
 	return [newImage autorelease];
@@ -67,19 +67,19 @@
 
 CGContextRef LTCreateRGBContext(CGSize size)
 {
-	size_t width = round(size.width);
-	size_t height = round(size.height);
+	size_t width = (size_t)round(size.width);
+	size_t height = (size_t)round(size.height);
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 	CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast);
 	CGColorSpaceRelease(colorSpace);
 	if (context)
-		CGContextClearRect(context, CGRectMake(0.0, 0.0, width, height));
+		CGContextClearRect(context, CGRectMake((CGFloat)0.0, (CGFloat)0.0, width, height));
 	return context;
 }
 
 @implementation CIImage (LTImage)
 
-- (CGImageRef)CGImage;
+- (CGImageRef)CGImage
 {
 	CGRect extent = [self extent];
 	if (CGRectIsInfinite(extent) || CGRectIsEmpty(extent))

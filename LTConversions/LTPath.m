@@ -22,7 +22,7 @@
 
 @implementation NSBezierPath (LTPath)
 
-- (CGPathRef)CGPath;
+- (CGPathRef)CGPath
 {
 	CGMutablePathRef newPath = CGPathCreateMutable();
 	NSPoint points[3];
