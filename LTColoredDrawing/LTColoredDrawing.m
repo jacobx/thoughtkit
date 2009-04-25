@@ -13,7 +13,7 @@
 - (void)beginDrawingColoredInRect:(NSRect)rect
 {
 	CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-	CGContextBeginTransparencyLayerWithRect(context, rect, NULL);
+	CGContextBeginTransparencyLayerWithRect(context, NSRectToCGRect(rect), NULL);
 }
 
 - (void)endDrawingColoredInRect:(NSRect)rect
