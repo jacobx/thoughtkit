@@ -1,7 +1,7 @@
 //
-//  LTColoredDrawing.m
+//  LTPixelAlign.h
 //
-//  Created by Jacob Godwin-Jones on 3/23/09.
+//  Created by Jacob Godwin-Jones on 10/21/09.
 //  Copyright 2009 Like Thought. 
 
 /*
@@ -18,22 +18,12 @@
  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "LTColoredDrawing.h"
+#import <Cocoa/Cocoa.h>
 
-@implementation NSColor (LTColoredDrawing)
+@interface NSView (LTPixelAlign)
 
-- (void)beginDrawingColoredInRect:(NSRect)rect
-{
-	CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-	CGContextBeginTransparencyLayerWithRect(context, NSRectToCGRect(rect), NULL);
-}
-
-- (void)endDrawingColoredInRect:(NSRect)rect
-{
-	[self setFill];
-	NSRectFillUsingOperation(rect, NSCompositeSourceAtop);
-	CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-	CGContextEndTransparencyLayer(context);
-}
+- (CGFloat)pixelAlignStroke:(CGFloat)stroke;
+- (NSPoint)pixelAlignPoint:(NSPoint)point withStroke:(CGFloat)stroke;
+- (NSRect)pixelAlignRect:(NSRect)rect withStroke:(CGFloat)stroke;
 
 @end
