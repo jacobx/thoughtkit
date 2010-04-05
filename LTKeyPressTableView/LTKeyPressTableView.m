@@ -1,7 +1,7 @@
 //
 //  LTKeyPressTableView.m
 //
-//  Created by Jacob Godwin-Jones on 1/18/07.
+//  Created by Jacob Xiao on 1/18/07.
 //  Copyright 2007 Like Thought. 
 
 /*

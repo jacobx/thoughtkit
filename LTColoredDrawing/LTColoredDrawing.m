@@ -1,7 +1,7 @@
 //
 //  LTColoredDrawing.m
 //
-//  Created by Jacob Godwin-Jones on 3/23/09.
+//  Created by Jacob Xiao on 3/23/09.
 //  Copyright 2009 Like Thought. 
 
 /*
