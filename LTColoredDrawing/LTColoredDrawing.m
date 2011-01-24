@@ -24,16 +24,16 @@
 
 - (void)beginDrawingColoredInRect:(NSRect)rect
 {
-	CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-	CGContextBeginTransparencyLayerWithRect(context, NSRectToCGRect(rect), NULL);
+    CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextBeginTransparencyLayerWithRect(context, NSRectToCGRect(rect), NULL);
 }
 
 - (void)endDrawingColoredInRect:(NSRect)rect
 {
-	[self setFill];
-	NSRectFillUsingOperation(rect, NSCompositeSourceAtop);
-	CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-	CGContextEndTransparencyLayer(context);
+    [self setFill];
+    NSRectFillUsingOperation(rect, NSCompositeSourceAtop);
+    CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextEndTransparencyLayer(context);
 }
 
 @end

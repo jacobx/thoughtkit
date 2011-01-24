@@ -24,31 +24,31 @@
 
 + (NSColor *)colorWithCGColor:(CGColorRef)color
 {
-	NSInteger count = CGColorGetNumberOfComponents(color);
-	const CGFloat *comps = CGColorGetComponents(color);
-	CGColorSpaceRef quartzSpace = CGColorGetColorSpace(color);
-	NSColorSpace *space = [[NSColorSpace alloc] initWithCGColorSpace:quartzSpace];
-	if (!space)
-		return nil;
-	NSColor *newColor = [NSColor colorWithColorSpace:space components:comps count:count];
-	[space release];
-	return newColor;
+    NSInteger count = CGColorGetNumberOfComponents(color);
+    const CGFloat *comps = CGColorGetComponents(color);
+    CGColorSpaceRef quartzSpace = CGColorGetColorSpace(color);
+    NSColorSpace *space = [[NSColorSpace alloc] initWithCGColorSpace:quartzSpace];
+    if (!space)
+        return nil;
+    NSColor *newColor = [NSColor colorWithColorSpace:space components:comps count:count];
+    [space release];
+    return newColor;
 }
 
 - (CGColorRef)CGColor
 {
-	if ([[self colorSpaceName] isEqualToString:NSPatternColorSpace])
-		return NULL;
-	NSColorSpace *space = [self colorSpace];
-	CGColorSpaceRef quartzSpace = [space CGColorSpace];
-	if (!quartzSpace)
-		return NULL;
-	NSInteger count = [self numberOfComponents];
-	CGFloat comps[count];
-	[self getComponents:comps];
-	CGColorRef newColor = CGColorCreate(quartzSpace, comps);
-	[NSMakeCollectable(newColor) autorelease];
-	return newColor;
+    if ([[self colorSpaceName] isEqualToString:NSPatternColorSpace])
+        return NULL;
+    NSColorSpace *space = [self colorSpace];
+    CGColorSpaceRef quartzSpace = [space CGColorSpace];
+    if (!quartzSpace)
+        return NULL;
+    NSInteger count = [self numberOfComponents];
+    CGFloat comps[count];
+    [self getComponents:comps];
+    CGColorRef newColor = CGColorCreate(quartzSpace, comps);
+    [NSMakeCollectable(newColor) autorelease];
+    return newColor;
 }
 
 @end
@@ -57,32 +57,32 @@
 
 + (CIColor *)colorWithNSColor:(NSColor *)color
 {
-	CGColorRef quartzColor = [color CGColor];
-	if (!quartzColor)
-		return nil;
-	return [CIColor colorWithCGColor:quartzColor];
+    CGColorRef quartzColor = [color CGColor];
+    if (!quartzColor)
+        return nil;
+    return [CIColor colorWithCGColor:quartzColor];
 }
 
 - (NSColor *)NSColor
 {
-	NSInteger count = [self numberOfComponents];
-	const CGFloat *comps = [self components];
-	CGColorSpaceRef quartzSpace = [self colorSpace];
-	NSColorSpace *space = [[NSColorSpace alloc] initWithCGColorSpace:quartzSpace];
-	if (!space)
-		return nil;
-	NSColor *newColor = [NSColor colorWithColorSpace:space components:comps count:count];
-	[space release];
-	return newColor;
+    NSInteger count = [self numberOfComponents];
+    const CGFloat *comps = [self components];
+    CGColorSpaceRef quartzSpace = [self colorSpace];
+    NSColorSpace *space = [[NSColorSpace alloc] initWithCGColorSpace:quartzSpace];
+    if (!space)
+        return nil;
+    NSColor *newColor = [NSColor colorWithColorSpace:space components:comps count:count];
+    [space release];
+    return newColor;
 }
 
 - (CGColorRef)CGColor
 {
-	CGColorSpaceRef quartzSpace = [self colorSpace];
-	const CGFloat *comps = [self components];
-	CGColorRef newColor = CGColorCreate(quartzSpace, comps);
-	[NSMakeCollectable(newColor) autorelease];
-	return newColor;
+    CGColorSpaceRef quartzSpace = [self colorSpace];
+    const CGFloat *comps = [self components];
+    CGColorRef newColor = CGColorCreate(quartzSpace, comps);
+    [NSMakeCollectable(newColor) autorelease];
+    return newColor;
 }
 
 @end

@@ -24,38 +24,38 @@
 
 - (BOOL)performKeyPressFromKeyDown:(NSEvent *)event
 {
-	id delegate = [self delegate];
+    id delegate = [self delegate];
 
-	unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
-	if ((key == NSDeleteCharacter) && [delegate respondsToSelector:@selector(deleteSelectionFromTableView:)]) {
-		if ([self selectedRow] == -1)
-			NSBeep();
-		else
-			[delegate deleteSelectionFromTableView:self];
-		return YES;
-	} else if ((key == 0xf702) && [delegate respondsToSelector:@selector(goLeftFromTableView:)]) {
-		[delegate goLeftFromTableView:self];
-		return YES;
-	} else if ((key == 0xf703) && [delegate respondsToSelector:@selector(goRightFromTableView:)]) {
-		[delegate goRightFromTableView:self];
-		return YES;
-	} else if (((key == NSEnterCharacter) || (key == NSCarriageReturnCharacter)) &&
-			   (![delegate respondsToSelector:@selector(preventEnterEditingTableView:)] || ![delegate preventEnterEditingTableView:self])) {
-		NSInteger selectedRow = [self selectedRow];
-		if (selectedRow == -1) {
-			NSBeep();
-			return YES;
-		} else {
-			NSArray *columns = [self tableColumns];
-			for(NSTableColumn *column in columns) {
-				if ([[column dataCell] isEditable]) {
-					[self editColumn:[columns indexOfObject:column] row:selectedRow withEvent:nil select:YES];
-					return YES;
-				}
-			}
-		}
-	}
-	return NO;
+    unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+    if ((key == NSDeleteCharacter) && [delegate respondsToSelector:@selector(deleteSelectionFromTableView:)]) {
+        if ([self selectedRow] == -1)
+            NSBeep();
+        else
+            [delegate deleteSelectionFromTableView:self];
+        return YES;
+    } else if ((key == 0xf702) && [delegate respondsToSelector:@selector(goLeftFromTableView:)]) {
+        [delegate goLeftFromTableView:self];
+        return YES;
+    } else if ((key == 0xf703) && [delegate respondsToSelector:@selector(goRightFromTableView:)]) {
+        [delegate goRightFromTableView:self];
+        return YES;
+    } else if (((key == NSEnterCharacter) || (key == NSCarriageReturnCharacter)) &&
+               (![delegate respondsToSelector:@selector(preventEnterEditingTableView:)] || ![delegate preventEnterEditingTableView:self])) {
+        NSInteger selectedRow = [self selectedRow];
+        if (selectedRow == -1) {
+            NSBeep();
+            return YES;
+        } else {
+            NSArray *columns = [self tableColumns];
+            for(NSTableColumn *column in columns) {
+                if ([[column dataCell] isEditable]) {
+                    [self editColumn:[columns indexOfObject:column] row:selectedRow withEvent:nil select:YES];
+                    return YES;
+                }
+            }
+        }
+    }
+    return NO;
 }
 
 @end
@@ -64,8 +64,8 @@
 
 - (void)keyDown:(NSEvent *)event
 {
-	if (![self performKeyPressFromKeyDown:event])
-		[super keyDown:event];
+    if (![self performKeyPressFromKeyDown:event])
+        [super keyDown:event];
 }
 
 @end
@@ -74,8 +74,8 @@
 
 - (void)keyDown:(NSEvent *)event
 {
-	if (![self performKeyPressFromKeyDown:event])
-		[super keyDown:event];
+    if (![self performKeyPressFromKeyDown:event])
+        [super keyDown:event];
 }
 
 @end
