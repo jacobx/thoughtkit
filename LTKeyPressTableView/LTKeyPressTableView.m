@@ -49,7 +49,7 @@
             NSArray *columns = [self tableColumns];
             for(NSTableColumn *column in columns) {
                 if ([[column dataCell] isEditable]) {
-                    [self editColumn:(NSInteger)[columns indexOfObject:column] row:selectedRow withEvent:nil select:YES];
+                    [self editColumn:[columns indexOfObject:column] row:selectedRow withEvent:nil select:YES];
                     return YES;
                 }
             }
