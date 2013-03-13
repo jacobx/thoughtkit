@@ -22,7 +22,7 @@
 
 @interface NSColor (LTColoredDrawing)
 
-- (void)beginDrawingColoredInRect:(NSRect)rect;
-- (void)endDrawingColoredInRect:(NSRect)rect;
+- (void)LT_beginDrawingColoredInRect:(NSRect)rect;
+- (void)LT_endDrawingColoredInRect:(NSRect)rect;
 
 @end

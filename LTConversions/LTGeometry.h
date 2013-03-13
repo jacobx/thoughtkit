@@ -1,7 +1,7 @@
 //
 //  LTGeometry.h
 //
-//  Created by Jacob Godwin-Jones on 4/22/08.
+//  Created by Jacob Xiao on 4/22/08.
 //  Copyright 2008 Like Thought. 
 
 /*
@@ -22,20 +22,20 @@
 
 @interface CIVector (LTGeometry)
 
-+ (CIVector *)vectorWithNSRect:(NSRect)rect;
-+ (CIVector *)vectorWithNSPoint:(NSPoint)point;
-+ (CIVector *)vectorWithNSSize:(NSSize)size;
++ (CIVector *)LT_vectorWithNSRect:(NSRect)rect;
++ (CIVector *)LT_vectorWithNSPoint:(NSPoint)point;
++ (CIVector *)LT_vectorWithNSSize:(NSSize)size;
 
-- (NSRect)NSRectValue;
-- (NSPoint)NSPointValue;
-- (NSSize)NSSizeValue;
+- (NSRect)LT_NSRectValue;
+- (NSPoint)LT_NSPointValue;
+- (NSSize)LT_NSSizeValue;
 
-+ (CIVector *)vectorWithCGRect:(CGRect)rect;
-+ (CIVector *)vectorWithCGPoint:(CGPoint)point;
-+ (CIVector *)vectorWithCGSize:(CGSize)size;
++ (CIVector *)LT_vectorWithCGRect:(CGRect)rect;
++ (CIVector *)LT_vectorWithCGPoint:(CGPoint)point;
++ (CIVector *)LT_vectorWithCGSize:(CGSize)size;
 
-- (CGRect)CGRectValue;
-- (CGPoint)CGPointValue;
-- (CGSize)CGSizeValue;
+- (CGRect)LT_CGRectValue;
+- (CGPoint)LT_CGPointValue;
+- (CGSize)LT_CGSizeValue;
 
 @end

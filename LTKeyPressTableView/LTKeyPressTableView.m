@@ -22,7 +22,7 @@
 
 @implementation NSTableView (LTKeyPressTableViewAdditions)
 
-- (BOOL)performKeyPressFromKeyDown:(NSEvent *)event
+- (BOOL)LT_performKeyPressFromKeyDown:(NSEvent *)event
 {
     id delegate = [self delegate];
 
@@ -64,7 +64,7 @@
 
 - (void)keyDown:(NSEvent *)event
 {
-    if (![self performKeyPressFromKeyDown:event])
+    if (![self LT_performKeyPressFromKeyDown:event])
         [super keyDown:event];
 }
 
@@ -74,7 +74,7 @@
 
 - (void)keyDown:(NSEvent *)event
 {
-    if (![self performKeyPressFromKeyDown:event])
+    if (![self LT_performKeyPressFromKeyDown:event])
         [super keyDown:event];
 }
 

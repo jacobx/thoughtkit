@@ -1,7 +1,7 @@
 //
 //  LTImage.h
 //
-//  Created by Jacob Godwin-Jones on 4/22/08.
+//  Created by Jacob Xiao on 4/22/08.
 //  Copyright 2008 Like Thought. 
 
 /*
@@ -22,17 +22,13 @@
 
 @interface NSImage (LTImage)
 
-+ (NSImage *)imageWithCGImage:(CGImageRef)image;
-- (CGImageRef)CGImage;
-
-+ (NSImage *)imageWithCIImage:(CIImage *)image;
-- (CIImage *)CIImage;
++ (NSImage *)LT_imageWithCIImage:(CIImage *)image;
+- (CIImage *)LT_CIImage;
 
 @end
 
 @interface CIImage (LTImage)
 
-// CIImage already has imageWithCGImage:
-- (CGImageRef)CGImage;
+- (CGImageRef)LT_CGImage;
 
 @end

@@ -1,7 +1,7 @@
 //
 //  LTPath.h
 //
-//  Created by Jacob Godwin-Jones on 4/22/08.
+//  Created by Jacob Xiao on 4/22/08.
 //  Copyright 2008 Like Thought. 
 
 /*
@@ -22,7 +22,6 @@
 
 @interface NSBezierPath (LTPath)
 
-// No pathWithCGPath: because it would be a lossy conversion
-- (CGPathRef)CGPath;
+- (CGPathRef)LT_CGPath;
 
 @end

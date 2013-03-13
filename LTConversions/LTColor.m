@@ -22,40 +22,37 @@
 
 @implementation NSColor (LTColor)
 
-+ (NSColor *)colorWithCGColor:(CGColorRef)color
+- (CGColorRef)LT_CGColor
 {
-    NSInteger count = CGColorGetNumberOfComponents(color);
-    const CGFloat *comps = CGColorGetComponents(color);
-    CGColorSpaceRef quartzSpace = CGColorGetColorSpace(color);
-    NSColorSpace *space = [[NSColorSpace alloc] initWithCGColorSpace:quartzSpace];
-    if (!space)
-        return nil;
-    NSColor *newColor = [NSColor colorWithColorSpace:space components:comps count:count];
-    [space release];
-    return newColor;
-}
-
-- (CGColorRef)CGColor
-{
-    if ([[self colorSpaceName] isEqualToString:NSPatternColorSpace])
-        return NULL;
-    NSColorSpace *space = [self colorSpace];
-    CGColorSpaceRef quartzSpace = [space CGColorSpace];
-    if (!quartzSpace)
-        return NULL;
-    NSInteger count = [self numberOfComponents];
-    CGFloat comps[count];
-    [self getComponents:comps];
-    CGColorRef newColor = CGColorCreate(quartzSpace, comps);
-    [NSMakeCollectable(newColor) autorelease];
-    return newColor;
+    static BOOL hasCGColor;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        hasCGColor = [self respondsToSelector:@selector(CGColor)];
+    });
+    
+    if (hasCGColor) {
+        return [self CGColor];
+    } else {
+        if ([[self colorSpaceName] isEqualToString:NSPatternColorSpace])
+            return NULL;
+        NSColorSpace *space = [self colorSpace];
+        CGColorSpaceRef quartzSpace = [space CGColorSpace];
+        if (!quartzSpace)
+            return NULL;
+        NSInteger count = [self numberOfComponents];
+        CGFloat comps[count];
+        [self getComponents:comps];
+        CGColorRef newColor = CGColorCreate(quartzSpace, comps);
+        [NSMakeCollectable(newColor) autorelease];
+        return newColor;
+    }
 }
 
 @end
 
 @implementation CIColor (LTColor)
 
-+ (CIColor *)colorWithNSColor:(NSColor *)color
++ (CIColor *)LT_colorWithNSColor:(NSColor *)color
 {
     CGColorRef quartzColor = [color CGColor];
     if (!quartzColor)
@@ -63,7 +60,7 @@
     return [CIColor colorWithCGColor:quartzColor];
 }
 
-- (NSColor *)NSColor
+- (NSColor *)LT_NSColor
 {
     NSInteger count = [self numberOfComponents];
     const CGFloat *comps = [self components];
@@ -76,7 +73,7 @@
     return newColor;
 }
 
-- (CGColorRef)CGColor
+- (CGColorRef)LT_CGColor
 {
     CGColorSpaceRef quartzSpace = [self colorSpace];
     const CGFloat *comps = [self components];

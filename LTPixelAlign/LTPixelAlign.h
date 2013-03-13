@@ -1,7 +1,7 @@
 //
 //  LTPixelAlign.h
 //
-//  Created by Jacob Godwin-Jones on 10/21/09.
+//  Created by Jacob Xiao on 10/21/09.
 //  Copyright 2009 Like Thought. 
 
 /*
@@ -22,8 +22,8 @@
 
 @interface NSView (LTPixelAlign)
 
-- (CGFloat)pixelAlignStroke:(CGFloat)stroke;
-- (NSPoint)pixelAlignPoint:(NSPoint)point withStroke:(CGFloat)stroke;
-- (NSRect)pixelAlignRect:(NSRect)rect withStroke:(CGFloat)stroke;
+- (CGFloat)LT_pixelAlignStroke:(CGFloat)stroke;
+- (NSPoint)LT_pixelAlignPoint:(NSPoint)point withStroke:(CGFloat)stroke;
+- (NSRect)LT_pixelAlignRect:(NSRect)rect withStroke:(CGFloat)stroke;
 
 @end

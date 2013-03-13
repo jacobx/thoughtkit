@@ -1,7 +1,7 @@
 //
 //  LTImage.m
 //
-//  Created by Jacob Godwin-Jones on 4/22/08.
+//  Created by Jacob Xiao on 4/22/08.
 //  Copyright 2008 Like Thought. 
 
 /*
@@ -23,44 +23,22 @@
 
 @implementation NSImage (LTImage)
 
-- (NSBitmapImageRep *)bitmapImageRep
-{
-	id imageRep = [self bestRepresentationForDevice:nil];
-	if ([imageRep isKindOfClass:[NSBitmapImageRep class]])
-		return imageRep;
-	return [NSBitmapImageRep imageRepWithData:[self TIFFRepresentation]];
-}
-
-+ (NSImage *)imageWithCGImage:(CGImageRef)image
-{
-	NSImage *newImage = [[NSImage alloc] initWithSize:NSMakeSize(CGImageGetWidth(image), CGImageGetHeight(image))];
-	NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:image];
-	[newImage addRepresentation:rep];
-	[rep release];
-	return [newImage autorelease];
-}
-
-- (CGImageRef)CGImage
-{
-	return [[self bitmapImageRep] CGImage];
-}
-
-+ (NSImage *)imageWithCIImage:(CIImage *)image
++ (NSImage *)LT_imageWithCIImage:(CIImage *)image
 {
 	CGRect extent = [image extent];
 	if (CGRectIsInfinite(extent) || CGRectIsEmpty(extent))
 		return nil;
 	NSImage *newImage = [[NSImage alloc] initWithSize:NSSizeFromCGSize(extent.size)];
-	NSCIImageRep *rep = [[NSBitmapImageRep alloc] initWithCIImage:image];
+	NSImageRep *rep = [[NSBitmapImageRep alloc] initWithCIImage:image];
 	[newImage addRepresentation:rep];
 	[rep release];
 	return [newImage autorelease];
 }
 
-- (CIImage *)CIImage
+- (CIImage *)LT_CIImage
 {
-	CIImage *newImage = [[CIImage alloc] initWithBitmapImageRep:[self bitmapImageRep]];
-	return [newImage autorelease];
+    CGImageRef image = [self CGImageForProposedRect:NULL context:nil hints:nil];
+	return [CIImage imageWithCGImage:image];
 }
 
 @end
@@ -79,7 +57,7 @@ CGContextRef LTCreateRGBContext(CGSize size)
 
 @implementation CIImage (LTImage)
 
-- (CGImageRef)CGImage
+- (CGImageRef)LT_CGImage
 {
 	CGRect extent = [self extent];
 	if (CGRectIsInfinite(extent) || CGRectIsEmpty(extent))

@@ -22,13 +22,13 @@
 
 @implementation NSColor (LTColoredDrawing)
 
-- (void)beginDrawingColoredInRect:(NSRect)rect
+- (void)LT_beginDrawingColoredInRect:(NSRect)rect
 {
     CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
     CGContextBeginTransparencyLayerWithRect(context, NSRectToCGRect(rect), NULL);
 }
 
-- (void)endDrawingColoredInRect:(NSRect)rect
+- (void)LT_endDrawingColoredInRect:(NSRect)rect
 {
     [self setFill];
     NSRectFillUsingOperation(rect, NSCompositeSourceAtop);

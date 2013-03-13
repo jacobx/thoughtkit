@@ -22,17 +22,15 @@
 
 @interface NSColor (LTColor)
 
-+ (NSColor *)colorWithCGColor:(CGColorRef)color;
-- (CGColorRef)CGColor;
+- (CGColorRef)LT_CGColor;
 
 @end
 
 @interface CIColor (LTColor)
 
-+ (CIColor *)colorWithNSColor:(NSColor *)color;
-- (NSColor *)NSColor;
++ (CIColor *)LT_colorWithNSColor:(NSColor *)color;
+- (NSColor *)LT_NSColor;
 
-// CIColor already has colorWithCGColor:
-- (CGColorRef)CGColor;
+- (CGColorRef)LT_CGColor;
 
 @end

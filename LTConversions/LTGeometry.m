@@ -1,7 +1,7 @@
 //
 //  LTGeometry.m
 //
-//  Created by Jacob Godwin-Jones on 4/22/08.
+//  Created by Jacob Xiao on 4/22/08.
 //  Copyright 2008 Like Thought. 
 
 /*
@@ -22,78 +22,78 @@
 
 @implementation CIVector (LTGeometry)
 
-+ (CIVector *)vectorWithNSRect:(NSRect)rect
++ (CIVector *)LT_vectorWithNSRect:(NSRect)rect
 {
 	const CGFloat values[4] = {rect.origin.x, rect.origin.y, rect.size.width, rect.size.height};
 	return [CIVector vectorWithValues:values count:4];
 }
 
-+ (CIVector *)vectorWithNSPoint:(NSPoint)point
++ (CIVector *)LT_vectorWithNSPoint:(NSPoint)point
 {
 	const CGFloat values[2] = {point.x, point.y};
 	return [CIVector vectorWithValues:values count:2];
 }
 
-+ (CIVector *)vectorWithNSSize:(NSSize)size
++ (CIVector *)LT_vectorWithNSSize:(NSSize)size
 {
 	const CGFloat values[2] = {size.width, size.height};
 	return [CIVector vectorWithValues:values count:2];
 }
 
-- (NSRect)NSRectValue
+- (NSRect)LT_NSRectValue
 {
 	if ([self count] != 4)
 		return NSZeroRect;
 	return NSMakeRect([self valueAtIndex:0], [self valueAtIndex:1], [self valueAtIndex:2], [self valueAtIndex:3]);
 }
 
-- (NSPoint)NSPointValue
+- (NSPoint)LT_NSPointValue
 {
 	if ([self count] != 2)
 		return NSZeroPoint;
 	return NSMakePoint([self valueAtIndex:0], [self valueAtIndex:1]);
 }
 
-- (NSSize)NSSizeValue
+- (NSSize)LT_NSSizeValue
 {
 	if ([self count] != 2)
 		return NSZeroSize;
 	return NSMakeSize([self valueAtIndex:0], [self valueAtIndex:1]);
 }
 
-+ (CIVector *)vectorWithCGRect:(CGRect)rect
++ (CIVector *)LT_vectorWithCGRect:(CGRect)rect
 {
 	const CGFloat values[4] = {rect.origin.x, rect.origin.y, rect.size.width, rect.size.height};
 	return [CIVector vectorWithValues:values count:4];
 }
 
-+ (CIVector *)vectorWithCGPoint:(CGPoint)point
++ (CIVector *)LT_vectorWithCGPoint:(CGPoint)point
 {
 	const CGFloat values[2] = {point.x, point.y};
 	return [CIVector vectorWithValues:values count:2];
 }
 
-+ (CIVector *)vectorWithCGSize:(CGSize)size
++ (CIVector *)LT_vectorWithCGSize:(CGSize)size
 {
 	const CGFloat values[2] = {size.width, size.height};
 	return [CIVector vectorWithValues:values count:2];
 }
 
-- (CGRect)CGRectValue
+- (CGRect)LT_CGRectValue
 {
 	if ([self count] != 4)
 		return CGRectZero;
 	return CGRectMake([self valueAtIndex:0], [self valueAtIndex:1], [self valueAtIndex:2], [self valueAtIndex:3]);
 }
 
-- (CGPoint)CGPointValue
+- (CGPoint)LT_CGPointValue
 {
 	if ([self count] != 2)
 		return CGPointZero;
 	return CGPointMake([self valueAtIndex:0], [self valueAtIndex:1]);
 }
 
-- (CGSize)CGSizeValue
+- (CGSize)LT_CGSizeValue
 {
 	if ([self count] != 2)
 		return CGSizeZero;

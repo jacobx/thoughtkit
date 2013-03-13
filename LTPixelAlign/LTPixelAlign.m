@@ -1,7 +1,7 @@
 //
 //  LTPixelAlign.m
 //
-//  Created by Jacob Godwin-Jones on 10/21/09.
+//  Created by Jacob Xiao on 10/21/09.
 //  Copyright 2009 Like Thought. 
 
 /*
@@ -26,7 +26,7 @@
 
 @implementation NSView (LTPixelAlign)
 
-- (CGFloat)pixelAlignStroke:(CGFloat)stroke
+- (CGFloat)LT_pixelAlignStroke:(CGFloat)stroke
 {
 	NSSize strokeSize = NSMakeSize(stroke, 0.0);
 	strokeSize = [self convertSizeToBase:strokeSize];
@@ -40,7 +40,7 @@
 	return strokeSize.width;
 }
 
-- (NSPoint)pixelAlignPoint:(NSPoint)point withStroke:(CGFloat)stroke
+- (NSPoint)LT_pixelAlignPoint:(NSPoint)point withStroke:(CGFloat)stroke
 {
 	stroke = [self LT_pixelAlignPixelizedHalfStroke:stroke];
 	point = [self convertPointToBase:point];
@@ -52,7 +52,7 @@
 	return point;
 }
 
-- (NSRect)pixelAlignRect:(NSRect)rect withStroke:(CGFloat)stroke
+- (NSRect)LT_pixelAlignRect:(NSRect)rect withStroke:(CGFloat)stroke
 {
 	stroke = [self LT_pixelAlignPixelizedHalfStroke:stroke];
 	rect = [self convertRectToBase:rect];
